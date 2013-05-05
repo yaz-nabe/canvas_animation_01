@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<htmllang="en">
+<meta content="text/html"; charset="utf-8" />
+<head>
+	<title>HTML5 Animation Test</title>
+	<script type="text/javascript">
+		window.addEventListener('load', eventWindowLoaded, false);
+		function eventWindowLoaded() {
+			canvasApp();
+		}
+
+		function canvasSupport() {
+			return false;
+		}
+
+		function canvasApp() {
+		    var dX = 0;
+			var dY = 0;
+			function drawScreen() {
+				context.fillStyle = '#EEEEEE';
+				context.fillRect(0, 0, theCanvas.width, theCanvas.height);
+
+				//Box
+				context.strokeStyle = "#000000";
+				context.strokeRect(1, 1, theCanvas.width-2, theCanvas.height-2);
+				
+				var loopCount = 25;
+				
+				var xA = 10-dX;
+				var xB = 10-dX;
+				var xC = theCanvas.width-10+dX;
+				var xD = theCanvas.width-10+dX;
+				
+				var yA = 10-dY;
+				var yB = theCanvas.height-10+dY;
+				var yC = theCanvas.height-10+dY;
+				var yD = 10-dY;
+				
+				context.beginPath();
+				
+				for(var i=0; i<loopCount; i+=1){
+					context.moveTo(xA,yA);
+					context.lineTo(xB,yB);
+					context.lineTo(xC,yC);
+					context.lineTo(xD,yD);
+					context.lineTo(xA,yA);
+					
+					var xxA = xA+10;
+					var xxB = xB+10;
+					var xxC = xC-10;
+					var xxD = xD-10;
+					
+					var yyA = yA+10;
+					var yyB = yB-10;
+					var yyC = yC-10;
+					var yyD = yD+10;
+					
+					xA = xxA;
+					xB = xxB;
+					xC = xxC;
+					xD = xxD;
+					
+					yA = yyA;
+					yB = yyB;
+					yC = yyC;
+					yD = yyD;
+				}
+				
+				context.stroke();
+				
+				dX+=1;
+				dY+=1;
+				if(dX==10){
+					dX=0;
+					dY=0;
+				}
+			}
+
+			theCanvas = document.getElementById('canvasOne');
+			context = theCanvas.getContext('2d');
+
+			setInterval(drawScreen, 60);
+		}
+	</script>
+</head>
+
+<body>
+	<div style="position:absolute; top:50px; left:50px;">
+	<canvas id="canvasOne" width="500" height="500">
+	</canvas>
+</div>
+</body>
+</html>
